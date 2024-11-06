@@ -27,6 +27,9 @@ const config = Object.freeze({
   },
 });
 
+// parse request body
+app.use(express.json({ extended: true }));
+
 // enable cors requests
 if (config.enableCors) {
   app.use(cors());
@@ -51,6 +54,27 @@ app.get("/articles", (_, res) => {
   });
 
   success(res, articles);
+});
+
+// for post example
+app.post("/login", (_, res) => {
+  success(res, {
+    "token": "mock-token-string",
+  });
+});
+
+// for patch/put example
+app.patch("/article/:id", (req, res) => {
+  success(res, {
+    id: req.params.id
+  });
+});
+
+// for delete example
+app.delete("/article/:id", (req, res) => {
+  success(res, {
+    id: req.params.id
+  });
 });
 
 /////////////////////////////////////////////////
